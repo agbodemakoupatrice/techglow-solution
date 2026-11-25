@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechGlow Solutions | Développement Logiciel & Transformation Digitale à Parakou</title>
+  <meta name="description" content="TechGlow Solutions accompagne les PME et organisations de Parakou, Bénin : logiciels de gestion sur mesure, applications mobiles Flutter, sites web, automatisation, SEO local et assistance informatique." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #0b4f8a;
+      --primary-dark: #07345c;
+      --accent: #0d9488;
+      --accent-light: #14b8a6;
+      --bg-dark: #07111e;
+      --bg-dark-card: #0e1c2f;
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-light: #cbd5e1;
+      --border-light: #e2e8f0;
+      --border-dark: rgba(255, 255, 255, 0.1);
+      --radius: 14px;
+      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --shadow-glow: 0 0 35px rgba(20, 184, 166, 0.2);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(7, 17, 30, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-dark);
+      transition: var(--transition);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--accent-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(13, 148, 136, 0.45);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: var(--accent-light);
+    }
+
+    .btn-sm {
+      padding: 9px 18px;
+      font-size: 0.88rem;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 80% 20%, rgba(13, 148, 136, 0.18), transparent 45%),
+                  radial-gradient(circle at 15% 70%, rgba(11, 79, 138, 0.25), transparent 50%),
+                  var(--bg-dark);
+      color: #fff;
+      padding: 145px 0 90px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(20, 184, 166, 0.12);
+      border: 1px solid rgba(20, 184, 166, 0.35);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      margin-bottom: 22px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #38bdf8, #2dd4bf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat-item span {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    /* Hero Code / Dashboard Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .code-card {
+      background: var(--bg-dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      box-shadow: var(--shadow-glow), 0 24px 50px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .window-dots span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #f59e0b; }
+    .dot-g { background: #10b981; }
+
+    .code-filename {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    .code-body {
+      padding: 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.83rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .c-kw { color: #38bdf8; }
+    .c-fn { color: #2dd4bf; }
+    .c-str { color: #fbbf24; }
+    .c-cm { color: #64748b; font-style: italic; }
+
+    .floating-pill {
+      position: absolute;
+      bottom: -18px;
+      left: -20px;
+      background: #ffffff;
+      color: var(--text-main);
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .floating-pill .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    /* ================= TECH BAR ================= */
+    .tech-strip {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 24px 0;
+    }
+
+    .tech-strip-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .tech-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tech-badge {
+      padding: 6px 14px;
+      background: #fff;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* ================= SECTIONS GENERAL ================= */
+    section {
+      padding: 90px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 5px 14px;
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.45rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    /* ================= SERVICES ================= */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 26px;
+    }
+
+    .service-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(13, 148, 136, 0.35);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(11, 79, 138, 0.1), rgba(13, 148, 136, 0.15));
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      margin-bottom: 16px;
+    }
+
+    .service-list li {
+      font-size: 0.86rem;
+      color: var(--text-main);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    /* ================= PORTFOLIO ================= */
+    .portfolio-section {
+      background: var(--bg-light);
+    }
+
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-light);
+      background: #fff;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 26px;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-banner {
+      height: 170px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fff;
+      position: relative;
+    }
+
+    .banner-blue { background: linear-gradient(135deg, #0b4f8a, #1d4ed8); }
+    .banner-teal { background: linear-gradient(135deg, #0d9488, #065f46); }
+    .banner-dark { background: linear-gradient(135deg, #0f172a, #1e293b); }
+    .banner-indigo { background: linear-gradient(135deg, #312e81, #0284c7); }
+
+    .project-cat {
+      align-self: flex-start;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .project-banner-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .project-content {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-content p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .project-tags span {
+      padding: 4px 10px;
+      background: var(--bg-light);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    /* ================= FORMATIONS & SEO ================= */
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .training-card {
+      background: var(--bg-dark);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+
+    .training-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+    }
+
+    .training-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .training-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .training-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* ================= PROCESSUS ================= */
+    .process-section {
+      background: linear-gradient(135deg, var(--primary-dark), var(--bg-dark));
+      color: #fff;
+    }
+
+    .process-section .section-header h2 {
+      color: #fff;
+    }
+
+    .process-section .section-header p {
+      color: var(--text-light);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+    }
+
+    .process-step {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .step-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-light);
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .process-step h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .process-step p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* ================= CONTACT ================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-info-card {
+      background: var(--bg-dark);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+
+    .contact-info-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-info-card > p {
+      color: var(--text-light);
+      font-size: 0.94rem;
+      margin-bottom: 28px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(20, 184, 166, 0.15);
+      color: var(--accent-light);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .info-item strong {
+      display: block;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .info-item span,
+    .info-item a {
+      font-size: 0.92rem;
+      color: var(--text-light);
+    }
+
+    .contact-form-card {
+      background: #fff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.94rem;
+      transition: var(--transition);
+      background: var(--bg-light);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    .form-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #040b14;
+      color: var(--text-light);
+      padding: 64px 0 28px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      gap: 36px;
+      margin-bottom: 48px;
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-top: 14px;
+      max-width: 320px;
+    }
+
+    footer h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--border-dark);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .floating-pill {
+        position: static;
+        margin-top: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-dark);
+        padding: 24px;
+        border-bottom: 1px solid var(--border-dark);
+        gap: 18px;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#accueil" class="brand">
+        <!-- Logo SVG fidèle à TechGlow Solutions -->
+        <svg class="brand-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="tgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b4f8a"/>
+              <stop offset="100%" stop-color="#14b8a6"/>
+            </linearGradient>
+          </defs>
+          <!-- Bouclier -->
+          <path d="M50 8L84 22V48C84 68 69 84 50 92C31 84 16 68 16 48V22L50 8Z" stroke="url(#tgGrad)" stroke-width="6" stroke-linejoin="round"/>
+          <!-- Accolades code -->
+          <path d="M22 36C18 36 16 39 16 43V46C16 48 13 50 10 50C13 50 16 52 16 54V57C16 61 18 64 22 64" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+          <path d="M78 36C82 36 84 39 84 43V46C84 48 87 50 90 50C87 50 84 52 84 54V57C84 61 82 64 78 64" stroke="#2dd4bf" stroke-width="5" stroke-linecap="round"/>
+          <!-- Flèche de croissance -->
+          <path d="M35 62L68 29M68 29H53M68 29V44" stroke="url(#tgGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-title">TechGlow Solutions</span>
+          <span class="brand-sub">Développement Logiciel & PME</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#accueil">Accueil</a>
+        <a href="#services">Services</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#formations">Formations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary btn-sm">Demander un devis</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="accueil">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          Parakou, Bénin • Disponible 24h/24 (Sur site & à distance)
+        </div>
+        <h1>Transformez votre PME avec des <span>logiciels sur mesure</span></h1>
+        <p>
+          <strong>TechGlow Solutions</strong> accompagne les entreprises et organisations de Parakou et du Bénin dans leur transformation digitale : informatique de gestion, applications mobiles, sites web professionnels, automatisation et audit SEO local.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Démarrer un projet →</a>
+          <a href="#realisations" class="btn btn-outline">Voir nos réalisations</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <strong>100%</strong>
+            <span>Solutions sur mesure</span>
+          </div>
+          <div class="stat-item">
+            <strong>24h/24</strong>
+            <span>Assistance technique</span>
+          </div>
+          <div class="stat-item">
+            <strong>Web & Mobile</strong>
+            <span>Flutter, Laravel & SQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="code-card">
+          <div class="code-header">
+            <div class="window-dots">
+              <span class="dot-r"></span>
+              <span class="dot-y"></span>
+              <span class="dot-g"></span>
+            </div>
+            <span class="code-filename">TechGlowCore.dart • Parakou</span>
+          </div>
+          <pre class="code-body"><code><span class="c-cm">// Architecture robuste pour PME & Organisations</span>
+<span class="c-kw">class</span> <span class="c-fn">TechGlowSolutions</span> {
+  <span class="c-kw">final</span> String localisation = <span class="c-str">"Banikanni, Parakou - Bénin"</span>;
+  <span class="c-kw">final</span> List&lt;String&gt; expertises = [
+    <span class="c-str">"Logiciels de Gestion & Facturation"</span>,
+    <span class="c-str">"Apps Mobiles Flutter (ex: OrientBénin)"</span>,
+    <span class="c-str">"Plateformes Web Laravel & PostgreSQL"</span>,
+    <span class="c-str">"Audit SEO Local & Automatisation"</span>,
+  ];
+
+  <span class="c-kw">void</span> <span class="c-fn">boosterEntreprise</span>() =&gt; deploySolution(
+    performance: <span class="c-str">"Optimale"</span>,
+    support: <span class="c-str">"Sur site ou à distance 24h/24"</span>,
+  );
+}</code></pre>
+        </div>
+
+        <div class="floating-pill">
+          <div class="icon-box">⚡</div>
+          <div>
+            <div>Gestion Stocks, Facturation & Bases de Données</div>
+            <small style="color: #64748b; font-weight: 500;">Fiabilité & Sécurité garanties</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK BAR -->
+  <div class="tech-strip">
+    <div class="container tech-strip-inner">
+      <span class="tech-label">Technologies maîtrisées :</span>
+      <div class="tech-badges">
+        <span class="tech-badge">Flutter / Dart</span>
+        <span class="tech-badge">PHP / Laravel</span>
+        <span class="tech-badge">PostgreSQL / MySQL</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">HTML5 / Tailwind CSS</span>
+        <span class="tech-badge">Linux & Réseaux</span>
+        <span class="tech-badge">Google SEO Local</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nos Services</span>
+        <h2>Des solutions informatiques pensées pour votre croissance</h2>
+        <p>Nous concevons des outils numériques fiables, intuitifs et adaptés aux réalités des PME, écoles, commerces et institutions.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+          </div>
+          <h3>Logiciels de Gestion Sur Mesure</h3>
+          <p>Centralisez et sécurisez l'activité de votre entreprise grâce à une informatique de gestion performante.</p>
+          <ul class="service-list">
+            <li>Gestion de stocks et inventaires</li>
+            <li>Facturation et suivi financier (FCFA)</li>
+            <li>Gestion scolaire & inscriptions</li>
+            <li>Bases de données PostgreSQL / MySQL</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Sites Web & Plateformes Métier</h3>
+          <p>Renforcez votre crédibilité en ligne avec des sites vitrines modernes et des applications web sécurisées.</p>
+          <ul class="service-list">
+            <li>Sites institutionnels & vitrines pro</li>
+            <li>Applications web Laravel / PHP</li>
+            <li>Espaces membres & messagerie interne</li>
+            <li>Interfaces rapides et responsive</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3>Applications Mobiles (Flutter)</h3>
+          <p>Touchez vos clients directement sur smartphone Android et iOS avec des interfaces fluides et ergonomiques.</p>
+          <ul class="service-list">
+            <li>Applications d'orientation & services</li>
+            <li>Suivi budgétaire et gestion de prêts</li>
+            <li>Notifications et synchronisation cloud</li>
+            <li>Design UI/UX soigné</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg>
+          </div>
+          <h3>Automatisation des Tâches</h3>
+          <p>Éliminez les saisies manuelles répétitives et gagnez des heures de productivité chaque semaine.</p>
+          <ul class="service-list">
+            <li>Scripts d'automatisation Python</li>
+            <li>Génération automatique de rapports</li>
+            <li>Traitement avancé de données</li>
+            <li>Connexion entre vos outils existants</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <h3>Audit SEO Local & Visibilité Google</h3>
+          <p>Attirez plus de clients à Parakou et dans tout le Bénin grâce au référencement local optimisé.</p>
+          <ul class="service-list">
+            <li>Audit complet de fiche Google Business</li>
+            <li>Positionnement sur Google Maps</li>
+            <li>Optimisation des mots-clés locaux</li>
+            <li>Stratégie de visibilité digitale</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Réseaux & Assistance Technique</h3>
+          <p>Une équipe réactive pour sécuriser vos infrastructures et dépanner vos postes sur site ou à distance.</p>
+          <ul class="service-list">
+            <li>Architecture et routage réseau</li>
+            <li>Administration systèmes Linux / Windows</li>
+            <li>Support technique disponible 24h/24</li>
+            <li>Maintenance préventive et évolutive</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REALISATIONS / PORTFOLIO -->
+  <section class="portfolio-section" id="realisations">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Portfolio</span>
+        <h2>Nos réalisations concrètes</h2>
+        <p>Découvrez un aperçu des applications mobiles, plateformes web et systèmes de gestion développés par notre équipe.</p>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">Tout voir</button>
+        <button class="filter-btn" data-filter="mobile">Applications Mobiles</button>
+        <button class="filter-btn" data-filter="web">Web & Gestion</button>
+        <button class="filter-btn" data-filter="infra">Data & Réseaux</button>
+      </div>
+
+      <div class="portfolio-grid">
+        <article class="project-card" data-category="mobile">
+          <div class="project-banner banner-teal">
+            <span class="project-cat">Application Mobile</span>
+            <h3 class="project-banner-title">OrientBénin</h3>
+          </div>
+          <div class="project-content">
+            <p>Application mobile dédiée à l'orientation académique, la recherche de stages et la découverte des filières universitaires au Bénin, adossée à une base PostgreSQL structurée.</p>
+            <div class="project-tags">
+              <span>Flutter</span>
+              <span>Dart</span>
+              <span>PostgreSQL</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="web">
+          <div class="project-banner banner-blue">
+            <span class="project-cat">Plateforme Web</span>
+            <h3 class="project-banner-title">Gestion Scolaire & Inscriptions</h3>
+          </div>
+          <div class="project-content">
+            <p>Système complet d'administration scolaire : gestion des niveaux, années académiques, inscriptions aux formations et processus d'authentification sécurisé en 3 étapes.</p>
+            <div class="project-tags">
+              <span>Laravel</span>
+              <span>PHP</span>
+              <span>Tailwind CSS</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="mobile">
+          <div class="project-banner banner-indigo">
+            <span class="project-cat">Finances & Budget</span>
+            <h3 class="project-banner-title">Suivi de Dépenses FCFA</h3>
+          </div>
+          <div class="project-content">
+            <p>Application intuitive de gestion financière quotidienne permettant de catégoriser les dépenses (alimentation, prêts), rechercher les transactions et maîtriser son budget en FCFA.</p>
+            <div class="project-tags">
+              <span>Mobile UI</span>
+              <span>Base de données</span>
+              <span>Gestion FCFA</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="web">
+          <div class="project-banner banner-teal">
+            <span class="project-cat">Communication</span>
+            <h3 class="project-banner-title">Messagerie Web d'Entreprise</h3>
+          </div>
+          <div class="project-content">
+            <p>Plateforme de messagerie moderne conçue pour permettre aux équipes de discuter en privé ou en groupes et de partager des documents professionnels rapidement.</p>
+            <div class="project-tags">
+              <span>PHP / JS</span>
+              <span>Chat Temps Réel</span>
+              <span>Sécurisé</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="infra">
+          <div class="project-banner banner-dark">
+            <span class="project-cat">SEO & Visibilité</span>
+            <h3 class="project-banner-title">Outil d'Audit SEO Local</h3>
+          </div>
+          <div class="project-content">
+            <p>Solution d'analyse et d'optimisation des fiches d'établissement Google pour aider les commerces et PME locales à dominer les résultats de recherche à proximité.</p>
+            <div class="project-tags">
+              <span>SEO Local</span>
+              <span>Google Business</span>
+              <span>Analytics</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="infra">
+          <div class="project-banner banner-dark">
+            <span class="project-cat">Infrastructure IT</span>
+            <h3 class="project-banner-title">Topologies Réseaux & Linux</h3>
+          </div>
+          <div class="project-content">
+            <p>Conception d'architectures réseau multi-routeurs, configuration IP/portproxy et déploiement d'environnements serveurs virtualisés sous Linux pour entreprises.</p>
+            <div class="project-tags">
+              <span>Routage Réseau</span>
+              <span>Linux VirtualBox</span>
+              <span>Administration</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATIONS PROFESSIONNELLES -->
+  <section id="formations">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Montée en compétences</span>
+        <h2>Nos Formations Pratiques</h2>
+        <p>En plus du développement logiciel, nous formons les particuliers, étudiants et équipes d'entreprises aux outils numériques clés.</p>
+      </div>
+
+      <div class="training-grid">
+        <div class="training-card">
+          <span class="training-badge">Programmation</span>
+          <h3>Apprendre à programmer avec Python</h3>
+          <p>Maîtrisez les bases de l'algorithmique, l'automatisation de scripts et le développement d'applications concrètes avec Python.</p>
+        </div>
+
+        <div class="training-card">
+          <span class="training-badge">Data & Bureautique</span>
+          <h3>Excel & Traitement de Données</h3>
+          <p>Tableaux de bord automatisés, formules avancées et analyse de données pour une meilleure prise de décision en entreprise.</p>
+        </div>
+
+        <div class="training-card">
+          <span class="training-badge">Communication</span>
+          <h3>Présentations PowerPoint Pro</h3>
+          <p>Concevez des supports de présentation élégants, structurés et percutants pour convaincre vos partenaires et clients.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSUS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" style="background: rgba(45, 212, 191, 0.15); color: #2dd4bf;">Notre Méthode</span>
+        <h2>Comment nous réalisons votre projet</h2>
+        <p>Une démarche structurée, transparente et orientée résultats du premier échange jusqu'à la mise en production.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <h3>Audit & Analyse</h3>
+          <p>Nous écoutons vos besoins métier (stocks, facturation, site web, visibilité) et définissons un cahier des charges clair.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <h3>Architecture & Design</h3>
+          <p>Conception de la base de données et des maquettes d'interfaces ergonomiques adaptées à vos utilisateurs.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <h3>Développement & Tests</h3>
+          <p>Programmation propre, sécurisée et rigoureusement testée pour garantir rapidité et fiabilité au quotidien.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <h3>Déploiement & Suivi</h3>
+          <p>Installation, formation de votre équipe et assistance technique réactive sur site à Parakou ou à distance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Contact & Devis</span>
+        <h2>Parlons de votre projet</h2>
+        <p>Vous êtes une PME, une école ou une organisation à Parakou ou ailleurs ? Contactez-nous pour un devis gratuit.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <h3>TechGlow Solutions</h3>
+          <p>Votre partenaire de confiance en développement logiciel, automatisation et transformation digitale à Parakou.</p>
+
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div>
+              <strong>Adresse</strong>
+              <span>Quartier Banikanni (derrière l'Université de Parakou), 00229, Parakou, Bénin</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div>
+              <strong>Téléphone & WhatsApp</strong>
+              <a href="tel:+2290152359536">+229 01 52 35 95 36</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">🕒</div>
+            <div>
+              <strong>Horaires d'ouverture</strong>
+              <span style="color: #4ade80; font-weight: 600;">Ouvert 24h/24 • Sur site ou à distance</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/2290152359536?text=Bonjour%20TechGlow%20Solutions%2C%20je%20souhaite%20discuter%20d'un%20projet%20informatique." target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+            Discuter directement sur WhatsApp
+          </a>
+        </div>
+
+        <form class="contact-form-card" id="quoteForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom complet *</label>
+              <input type="text" id="nom" placeholder="Ex: Jean Kouassi" required />
+            </div>
+            <div class="form-group">
+              <label for="entreprise">Entreprise / Organisation</label>
+              <input type="text" id="entreprise" placeholder="Ex: Ma PME SARL" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telephone">Téléphone / WhatsApp *</label>
+              <input type="tel" id="telephone" placeholder="+229 01 XX XX XX XX" required />
+            </div>
+            <div class="form-group">
+              <label for="service">Service souhaité *</label>
+              <select id="service" required>
+                <option value="">-- Choisir un service --</option>
+                <option value="Logiciel de gestion sur mesure">Logiciel de gestion sur mesure</option>
+                <option value="Site web professionnel">Site web professionnel</option>
+                <option value="Application mobile (Flutter)">Application mobile (Flutter)</option>
+                <option value="Automatisation & Base de données">Automatisation & Base de données</option>
+                <option value="Audit SEO Local">Audit SEO Local</option>
+                <option value="Formation (Python, Excel, PowerPoint)">Formation (Python, Excel, PowerPoint)</option>
+                <option value="Assistance & Réseau">Assistance & Réseau</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Décrivez votre besoin *</label>
+            <textarea id="message" rows="4" placeholder="Expliquez brièvement votre projet, vos objectifs ou les difficultés que vous souhaitez résoudre..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Envoyer ma demande via WhatsApp →
+          </button>
+          <p class="form-note">Votre message sera pré-rempli automatiquement pour une réponse rapide de notre équipe.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#accueil" class="brand">
+            <svg class="brand-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 8L84 22V48C84 68 69 84 50 92C31 84 16 68 16 48V22L50 8Z" stroke="#14b8a6" stroke-width="6" stroke-linejoin="round"/>
+              <path d="M35 62L68 29M68 29H53M68 29V44" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="brand-text">
+              <span class="brand-title">TechGlow Solutions</span>
+              <span class="brand-sub">Parakou • Bénin</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            Consultant informatique et développement logiciel sur mesure pour les PME et organisations. Qualité, sécurité et accompagnement de proximité.
+          </p>
+        </div>
+
+        <div>
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#realisations">Réalisations</a></li>
+            <li><a href="#formations">Formations</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Expertises</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Informatique de gestion</a></li>
+            <li><a href="#services">Développement Web & Mobile</a></li>
+            <li><a href="#services">Bases de données PostgreSQL</a></li>
+            <li><a href="#services">Audit SEO Local</a></li>
+            <li><a href="#services">Support 24h/24</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Coordonnées</h4>
+          <ul class="footer-links">
+            <li>Qt Banikanni, derrière l'Université</li>
+            <li>00229, Parakou, Bénin</li>
+            <li><a href="tel:+2290152359536">+229 01 52 35 95 36</a></li>
+            <li>Ouvert 24h/24</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> TechGlow Solutions — Tous droits réservés.</span>
+        <span>Développement Logiciel & Programmation PME • Parakou, Bénin</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Année dynamique
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Filtrage du portfolio
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Envoi du formulaire vers WhatsApp
+    document.getElementById('quoteForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nom = document.getElementById('nom').value.trim();
+      const entreprise = document.getElementById('entreprise').value.trim() || 'Non précisée';
+      const tel = document.getElementById('telephone').value.trim();
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+
+      const text = `Bonjour TechGlow Solutions,%0A%0A*Nouvelle demande depuis le site web :*%0A• *Nom :* ${encodeURIComponent(nom)}%0A• *Entreprise :* ${encodeURIComponent(entreprise)}%0A• *Téléphone :* ${encodeURIComponent(tel)}%0A• *Service :* ${encodeURIComponent(service)}%0A• *Besoin :* ${encodeURIComponent(message)}`;
+
+      window.open(`https://wa.me/2290152359536?text=${text}`, '_blank');
+    });
+  </script>
+</body>
+</html>
